@@ -30,7 +30,7 @@ pipelines:
           - node
         script:
           - npm install
-          - npm build
+          - npm run build
           - pipe: atlassian/npm-publish:0.2.6
             variables:
               NPM_TOKEN: $NPM_TOKEN
