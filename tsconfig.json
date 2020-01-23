@@ -5,6 +5,8 @@
       "es6",
       "dom"
     ],
+    "module": "commonjs",
+    "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",

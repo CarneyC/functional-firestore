@@ -1,6 +1,6 @@
 {
   "name": "functional-firestore",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Google Cloud Firestore Utilities functions in Functional Programming",
   "main": "dist/functional-firestore.js",
   "scripts": {
@@ -9,6 +9,10 @@
     "integration-test": "cross-env FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 mocha -r ts-node/register tests/Integration/**/*.spec.ts",
     "unit-test": "mocha -r ts-node/register tests/Unit/**/*.spec.ts"
   },
+  "files": [
+    "/dist",
+    "/lib"
+  ],
   "author": "carneyc",
   "license": "MIT",
   "keywords": [
