@@ -10,8 +10,7 @@ module.exports = {
     extensions: ['.js', '.json', '.ts'],
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'functional-firestore.js',
+    path: path.resolve(__dirname, './lib'),
     libraryTarget: 'umd',
     globalObject: 'this',
     library: 'functionalFirestore',
@@ -29,10 +28,6 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
       }
     ],
   },

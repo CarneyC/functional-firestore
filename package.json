@@ -2,7 +2,7 @@
   "name": "functional-firestore",
   "version": "0.1.2",
   "description": "Google Cloud Firestore Utilities functions in Functional Programming",
-  "main": "dist/functional-firestore.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "test": "npm run unit-test",
@@ -10,7 +10,6 @@
     "unit-test": "mocha -r ts-node/register tests/Unit/**/*.spec.ts"
   },
   "files": [
-    "/dist",
     "/lib"
   ],
   "author": "carneyc",
