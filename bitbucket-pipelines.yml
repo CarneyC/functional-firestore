@@ -1,0 +1,37 @@
+image: node:10.15.3
+
+definitions:
+  services:
+    firestore-emulator:
+      image: carneyc/gcloud-firestore-emulator
+
+pipelines:
+  default:
+    - step:
+        name: Build and test
+        caches:
+          - node
+        script:
+          - npm install
+          - npm audit fix
+          - npm test
+    - step:
+        name: Integration Test
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run integration-test
+        services:
+          - firestore-emulator
+    - step:
+        name: Publish to NPM
+        caches:
+          - node
+        script:
+          - npm install
+          - npm build
+          - pipe: atlassian/npm-publish:0.2.6
+            varialbes:
+              NPM_TOKEN: $NPM_TOKEN
+
