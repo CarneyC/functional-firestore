@@ -1,5 +1,5 @@
 import fc, { Arbitrary } from 'fast-check';
-import { Model, Table } from '../../src';
+import { Model, Table } from './index';
 
 export const id = (): Arbitrary<string> => fc.hexaString(16, 16);
 

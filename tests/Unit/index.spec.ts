@@ -1,7 +1,7 @@
 import chai from 'chai';
 import fc from 'fast-check';
 import { isModel } from '../../src';
-import * as Arb from './arbitraries';
+import * as Arb from '../../src/Arbitraries';
 const { expect } = chai;
 
 describe('Firestore', function() {

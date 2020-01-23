@@ -11,8 +11,12 @@ import { identity, map, pipe, thunkify } from 'ramda';
 import * as E from 'fp-ts/lib/Either';
 import * as A from 'fp-ts/lib/Array';
 import * as T from 'fp-ts/lib/Task';
-import * as Arb from '../Unit/arbitraries';
-import { clearEmulator, clearFirestore, getFirestore } from './firebase';
+import * as Arb from '../../src/Arbitraries';
+import {
+  clearEmulator,
+  clearFirestore,
+  getFirestore,
+} from '../../src/Emulator';
 import { TaskEither } from 'fp-ts/lib/TaskEither';
 import { isLeft, isRight } from 'fp-ts/lib/Either';
 import { Firestore } from '@google-cloud/firestore';
