@@ -1,0 +1,72 @@
+{
+  "name": "functional-firestore",
+  "version": "0.1.0",
+  "description": "Google Cloud Firestore Utilities functions in Functional Programming",
+  "main": "dist/functional-firestore.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "npm run unit-test",
+    "integration-test": "cross-env FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 mocha -r ts-node/register tests/Integration/**/*.spec.ts",
+    "unit-test": "mocha -r ts-node/register tests/Unit/**/*.spec.ts"
+  },
+  "author": "carneyc",
+  "license": "MIT",
+  "keywords": [
+    "firestore",
+    "typescript",
+    "functional-programming"
+  ],
+  "dependencies": {
+    "@google-cloud/firestore": "^3.4.0",
+    "fp-ts": "^2.4.1",
+    "ramda": "^0.26.1",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.16"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/chai-datetime": "0.0.33",
+    "@types/chai-string": "^1.4.2",
+    "@types/chai-uuid": "^1.0.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^13.1.8",
+    "@types/ramda": "^0.26.39",
+    "@types/sinon": "^7.5.1",
+    "@types/sinon-chai": "^3.2.3",
+    "@types/uuid": "^3.4.6",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "chai": "^4.2.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-mocha": "^6.2.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "execa": "^4.0.0",
+    "fast-check": "^1.21.0",
+    "husky": "^4.0.3",
+    "json-loader": "^0.5.7",
+    "lint-staged": "^9.5.0",
+    "mocha": "^7.0.0",
+    "prettier": "^1.19.1",
+    "sinon": "^8.1.0",
+    "sinon-chai": "^3.4.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
