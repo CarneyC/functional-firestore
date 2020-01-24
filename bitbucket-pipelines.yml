@@ -27,6 +27,7 @@ pipelines:
     - step:
         name: Publish
         deployment: production
+        trigger: manual
         caches:
           - node
         script:
