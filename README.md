@@ -121,7 +121,11 @@ ___
   RTE.chainEitherK(getModelFromSnapshot)
 )
 
-Defined in src/Firestore.ts:138
+Defined in src/Firestore.ts:202
+
+```haskell
+getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
+```
 
 #### Type declaration:
 
@@ -142,7 +146,11 @@ ___
   R.map(getModelFromCollection)
 )
 
-Defined in src/Firestore.ts:146
+Defined in src/Firestore.ts:214
+
+```haskell
+getModelFromFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+```
 
 #### Type declaration:
 
@@ -164,7 +172,11 @@ ___
   E.chain(validateModel)
 )
 
-Defined in src/Firestore.ts:129
+Defined in src/Firestore.ts:189
+
+```haskell
+getModelFromSnapshot :: Snapshot -> Either Model Error
+```
 
 #### Type declaration:
 
@@ -185,7 +197,11 @@ ___
   R.map(getSnapshotFromDocument)
 )
 
-Defined in src/Firestore.ts:102
+Defined in src/Firestore.ts:146
+
+```haskell
+getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
+```
 
 #### Type declaration:
 
@@ -206,7 +222,11 @@ ___
   TEUtils.fromTask
 )
 
-Defined in src/Firestore.ts:94
+Defined in src/Firestore.ts:134
+
+```haskell
+getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
+```
 
 #### Type declaration:
 
@@ -227,7 +247,11 @@ ___
   R.chain(storeModelToDocument)
 )
 
-Defined in src/Firestore.ts:61
+Defined in src/Firestore.ts:85
+
+```haskell
+storeModelToCollection :: Collection -> Table -> ReaderTaskEither Model Model Error
+```
 
 #### Type declaration:
 
@@ -248,7 +272,11 @@ ___
   R.map(TEUtils.fromTask)
 )
 
-Defined in src/Firestore.ts:53
+Defined in src/Firestore.ts:73
+
+```haskell
+storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
+```
 
 #### Type declaration:
 
@@ -269,7 +297,11 @@ ___
   R.map(storeModelToCollection)
 )
 
-Defined in src/Firestore.ts:69
+Defined in src/Firestore.ts:97
+
+```haskell
+storeModelToFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+```
 
 #### Type declaration:
 
@@ -289,7 +321,11 @@ ___
   E.left(new Error('Item is not a valid model.'))
 )
 
-Defined in src/Firestore.ts:122
+Defined in src/Firestore.ts:178
+
+```haskell
+validateModel :: a -> Either Model Error
+```
 
 #### Type declaration:
 
@@ -309,7 +345,11 @@ ___
   E.left(new Error('Item does not exist.'))
 )
 
-Defined in src/Firestore.ts:115
+Defined in src/Firestore.ts:167
+
+```haskell
+validateSnapshotExistence :: snapshot -> Either a Error
+```
 
 #### Type declaration:
 
@@ -327,7 +367,11 @@ Name | Type |
 
 ▸ **clearEmulator**(): *Promise‹void›*
 
-Defined in src/Emulator.ts:14
+Defined in src/Emulator.ts:26
+
+```haskell
+clearFirebase :: () -> Promise
+```
 
 **Returns:** *Promise‹void›*
 
@@ -337,7 +381,11 @@ ___
 
 ▸ **clearFirestore**(): *Promise‹void›*
 
-Defined in src/Emulator.ts:11
+Defined in src/Emulator.ts:19
+
+```haskell
+clearFirestore :: () -> Promise
+```
 
 **Returns:** *Promise‹void›*
 
@@ -347,7 +395,11 @@ ___
 
 ▸ **fromTask**(`task`: Task‹A›): *TaskEither‹Error, A›*
 
-Defined in src/TaskEitherUtils.ts:6
+Defined in src/TaskEitherUtils.ts:10
+
+```haskell
+fromThunk :: Task -> TaskEither
+```
 
 **Parameters:**
 
@@ -363,7 +415,11 @@ ___
 
 ▸ **getCollectionFromFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:31
+Defined in src/Firestore.ts:39
+
+```haskell
+getCollectionFromFirestore :: Firestore -> Reader Table Collection
+```
 
 **Parameters:**
 
@@ -379,7 +435,11 @@ ___
 
 ▸ **getDataFromSnapshot**(`snapshot`: DocumentSnapshot‹object›): *object*
 
-Defined in src/Firestore.ts:110
+Defined in src/Firestore.ts:158
+
+```haskell
+getDataFromSnapshot :: Snapshot -> a
+```
 
 **Parameters:**
 
@@ -397,7 +457,11 @@ ___
 
 ▸ **getDocumentFromCollection**(`collection`: CollectionReference‹object›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:38
+Defined in src/Firestore.ts:50
+
+```haskell
+getDocumentFromCollection :: Collection -> Reader Model Document
+```
 
 **Parameters:**
 
@@ -413,7 +477,11 @@ ___
 
 ▸ **getFirestore**(): *Firestore‹›*
 
-Defined in src/Emulator.ts:8
+Defined in src/Emulator.ts:12
+
+```haskell
+getFirestore :: () -> Firestore
+```
 
 **Returns:** *Firestore‹›*
 
@@ -423,7 +491,11 @@ ___
 
 ▸ **getSnapshotFromDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:90
+Defined in src/Firestore.ts:126
+
+```haskell
+getSnapshotFromDocumentTask :: Document -> Task Snapshot
+```
 
 **Parameters:**
 
@@ -449,7 +521,11 @@ ___
 
 ▸ **isModel**(`a`: unknown): *a is Model*
 
-Defined in src/Firestore.ts:25
+Defined in src/Firestore.ts:29
+
+```haskell
+isModel :: a -> bool
+```
 
 **Parameters:**
 
@@ -465,7 +541,11 @@ ___
 
 ▸ **listCollectionsInFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:156
+Defined in src/Firestore.ts:228
+
+```haskell
+listCollectionsInFirestore :: Firestore -> Task [Collection]
+```
 
 **Parameters:**
 
@@ -531,7 +611,11 @@ ___
 
 ▸ **storeModelToDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:45
+Defined in src/Firestore.ts:61
+
+```haskell
+storeModelToDocumentTask :: Document -> Reader Model (Task Model)
+```
 
 **Parameters:**
 
@@ -547,7 +631,11 @@ ___
 
 ▸ **storeModelToFirestoreWith**<**A**>(`firestore`: any): *(Anonymous function)*
 
-Defined in src/Firestore.ts:82
+Defined in src/Firestore.ts:114
+
+```haskell
+storeModelToFirestoreWith :: Firestore -> Reader Table (ReaderTaskEither (() -> Model) Model Error)
+```
 
 **Type parameters:**
 

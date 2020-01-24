@@ -21,25 +21,41 @@ export interface Table {
   name: string;
 }
 
-// isModel :: a -> bool
+/**
+ * ```haskell
+ * isModel :: a -> bool
+ * ```
+ */
 export const isModel = (a: unknown): a is Model =>
   allPass([is(Object), propIs(String, 'id')])(a);
 
-// getCollectionFromFirestore :: Firestore -> Reader Table Collection
+/**
+ * ```haskell
+ * getCollectionFromFirestore :: Firestore -> Reader Table Collection
+ * ```
+ */
 export const getCollectionFromFirestore: (
   firestore: Firestore
 ) => R.Reader<Table, CollectionReference> = (firestore) => (
   table: Table
 ): CollectionReference => firestore.collection(table.name);
 
-// getDocumentFromCollection :: Collection -> Reader Model Document
+/**
+ * ```haskell
+ * getDocumentFromCollection :: Collection -> Reader Model Document
+ * ```
+ */
 export const getDocumentFromCollection: (
   collection: CollectionReference
 ) => R.Reader<Model, DocumentReference> = (collection) => (
   model: Model
 ): DocumentReference => collection.doc(model.id);
 
-// storeModelToDocumentTask :: Document -> Reader Model (Task Model)
+/**
+ * ```haskell
+ * storeModelToDocumentTask :: Document -> Reader Model (Task Model)
+ * ```
+ */
 const storeModelToDocumentTask: (
   document: DocumentReference
 ) => RT.ReaderTask<Model, Model> = (document) => (
@@ -49,7 +65,11 @@ const storeModelToDocumentTask: (
   return model;
 };
 
-// storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
+/**
+ * ```haskell
+ * storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
+ * ```
+ */
 const storeModelToDocument: (
   document: DocumentReference
 ) => RTE.ReaderTaskEither<Model, Error, Model> = pipe(
@@ -57,7 +77,11 @@ const storeModelToDocument: (
   R.map(TEUtils.fromTask)
 );
 
-// storeModelToCollection :: Collection -> Table -> ReaderTaskEither Model Model Error
+/**
+ * ```haskell
+ * storeModelToCollection :: Collection -> Table -> ReaderTaskEither Model Model Error
+ * ```
+ */
 export const storeModelToCollection: (
   collection: CollectionReference
 ) => RTE.ReaderTaskEither<Model, Error, Model> = pipe(
@@ -65,7 +89,11 @@ export const storeModelToCollection: (
   R.chain(storeModelToDocument)
 );
 
-// storeModelToFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+/**
+ * ```haskell
+ * storeModelToFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+ * ```
+ */
 export const storeModelToFirestore: (
   firestore: Firestore
 ) => R.Reader<Table, RTE.ReaderTaskEither<Model, Error, Model>> = pipe(
@@ -73,7 +101,11 @@ export const storeModelToFirestore: (
   R.map(storeModelToCollection)
 );
 
-// storeModelToFirestoreWith :: Firestore -> Reader Table (ReaderTaskEither (() -> Model) Model Error)
+/**
+ * ```haskell
+ * storeModelToFirestoreWith :: Firestore -> Reader Table (ReaderTaskEither (() -> Model) Model Error)
+ * ```
+ */
 export const storeModelToFirestoreWith: <A>(
   firestore: Firestore
 ) => R.Reader<
@@ -84,13 +116,21 @@ export const storeModelToFirestoreWith: <A>(
 ): RTE.ReaderTaskEither<A, Error, Model> =>
   pipe(fn, storeModelToFirestore(firestore)(table));
 
-// getSnapshotFromDocumentTask :: Document -> Task Snapshot
+/**
+ * ```haskell
+ * getSnapshotFromDocumentTask :: Document -> Task Snapshot
+ * ```
+ */
 export const getSnapshotFromDocumentTask: (
   document: DocumentReference
 ) => T.Task<DocumentSnapshot> = (document) => (): Promise<DocumentSnapshot> =>
   document.get();
 
-// getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
+/**
+ * ```haskell
+ * getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
+ * ```
+ */
 export const getSnapshotFromDocument: (
   document: DocumentReference
 ) => TE.TaskEither<Error, DocumentSnapshot> = pipe(
@@ -98,7 +138,11 @@ export const getSnapshotFromDocument: (
   TEUtils.fromTask
 );
 
-// getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
+/**
+ * ```haskell
+ * getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
+ * ```
+ */
 const getSnapshotFromCollection: (
   collection: CollectionReference
 ) => RTE.ReaderTaskEither<Model, Error, DocumentSnapshot> = pipe(
@@ -106,26 +150,42 @@ const getSnapshotFromCollection: (
   R.map(getSnapshotFromDocument)
 );
 
-// getDataFromSnapshot :: Snapshot -> a
+/**
+ * ```haskell
+ * getDataFromSnapshot :: Snapshot -> a
+ * ```
+ */
 const getDataFromSnapshot: (snapshot: DocumentSnapshot) => unknown = (
   snapshot
 ) => snapshot.data();
 
-// validateSnapshotExistence :: snapshot -> Either a Error
+/**
+ * ```haskell
+ * validateSnapshotExistence :: snapshot -> Either a Error
+ * ```
+ */
 export const validateSnapshotExistence: (
   snapshot: DocumentSnapshot
 ) => E.Either<Error, DocumentSnapshot> = ifElse(prop('exists'), E.right, () =>
   E.left(new Error('Item does not exist.'))
 );
 
-// validateModel :: a -> Either Model Error
+/**
+ * ```haskell
+ * validateModel :: a -> Either Model Error
+ * ```
+ */
 export const validateModel: (
   a: unknown
 ) => E.Either<Error, Model> = ifElse(isModel, E.right, () =>
   E.left(new Error('Item is not a valid model.'))
 );
 
-// getModelFromSnapshot :: Snapshot -> Either Model Error
+/**
+ * ```haskell
+ * getModelFromSnapshot :: Snapshot -> Either Model Error
+ * ```
+ */
 const getModelFromSnapshot: (
   snapshot: DocumentSnapshot
 ) => E.Either<Error, Model> = pipe(
@@ -134,7 +194,11 @@ const getModelFromSnapshot: (
   E.chain(validateModel)
 );
 
-// getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
+/**
+ * ```haskell
+ * getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
+ * ```
+ */
 export const getModelFromCollection: (
   collection: CollectionReference
 ) => RTE.ReaderTaskEither<Model, Error, Model> = pipe(
@@ -142,7 +206,11 @@ export const getModelFromCollection: (
   RTE.chainEitherK(getModelFromSnapshot)
 );
 
-// getModelFromFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+/**
+ * ```haskell
+ * getModelFromFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+ * ```
+ */
 export const getModelFromFirestore: (
   firestore: Firestore
 ) => R.Reader<Table, RTE.ReaderTaskEither<Model, Error, Model>> = pipe(
@@ -150,7 +218,11 @@ export const getModelFromFirestore: (
   R.map(getModelFromCollection)
 );
 
-// listCollectionsInFirestore :: Firestore -> Task [Collection]
+/**
+ * ```haskell
+ * listCollectionsInFirestore :: Firestore -> Task [Collection]
+ * ```
+ */
 export const listCollectionsInFirestore: (
   firestore: Firestore
 ) => T.Task<CollectionReference[]> = (firestore) => (): Promise<

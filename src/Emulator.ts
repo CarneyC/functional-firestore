@@ -4,11 +4,23 @@ const firestore = new Firestore({
   projectId: 'gcloud-project',
 });
 
-// getFirestore :: () -> Firestore
+/**
+ * ```haskell
+ * getFirestore :: () -> Firestore
+ * ```
+ */
 export const getFirestore: () => Firestore = () => firestore;
 
-// clearFirestore :: () -> Promise
+/**
+ * ```haskell
+ * clearFirestore :: () -> Promise
+ * ```
+ */
 export const clearFirestore: () => Promise<void> = () => Promise.resolve();
 
-// clearFirebase :: () -> Promise
+/**
+ * ```haskell
+ * clearFirebase :: () -> Promise
+ * ```
+ */
 export const clearEmulator: () => Promise<void> = () => Promise.resolve();
