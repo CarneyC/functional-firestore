@@ -1,8 +1,3 @@
-
-<a name="globalsmd"></a>
-
-[functional-firestore](#globalsmd)
-
 # functional-firestore
 
 ## Index
@@ -16,7 +11,6 @@
 * ["index"](#modules_index_md)
 
 
-<a name="readmemd"></a>
 
 [functional-firestore](#globalsmd)
 
@@ -25,8 +19,6 @@
 
 # Interfaces
 
-
-<a name="interfaces_firestore_modelmd"></a>
 
 [functional-firestore](#globalsmd) › ["Firestore"](#modules_firestore_md) › [Model](#interfaces_firestore_modelmd)
 
@@ -53,7 +45,6 @@ Defined in src/Firestore.ts:17
 # Modules
 
 
-<a name="modules_arbitraries_md"></a>
 
 [functional-firestore](#globalsmd) › ["Arbitraries"](#modules_arbitraries_md)
 
@@ -142,7 +133,6 @@ Defined in src/Arbitraries.ts:28
 **Returns:** *Arbitrary‹string›*
 
 
-<a name="modules_emulator_md"></a>
 
 [functional-firestore](#globalsmd) › ["Emulator"](#modules_emulator_md)
 
@@ -199,7 +189,6 @@ getFirestore :: () -> Firestore
 **Returns:** *Firestore‹›*
 
 
-<a name="modules_firestore_md"></a>
 
 [functional-firestore](#globalsmd) › ["Firestore"](#modules_firestore_md)
 
@@ -554,7 +543,6 @@ Name | Type |
 **Returns:** *(Anonymous function)*
 
 
-<a name="modules_index_md"></a>
 
 [functional-firestore](#globalsmd) › ["index"](#modules_index_md)
 
@@ -671,7 +659,6 @@ ___
 • **validateSnapshotExistence**:
 
 
-<a name="modules_taskeitherutils_md"></a>
 
 [functional-firestore](#globalsmd) › ["TaskEitherUtils"](#modules_taskeitherutils_md)
 
