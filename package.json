@@ -7,7 +7,7 @@
     "build": "npm run clean && tsc && tsc -m es6 --outDir es6",
     "clean": "shx rm -rf lib es6",
     "test": "npm run unit-test",
-    "doc": "shx rm -rf temp-docs && typedoc --plugin typedoc-plugin-markdown --theme markdown --mode file --out temp-docs && concat-md --toc --decrease-title-levels --dir-name-as-title temp-docs > README.md && shx rm -rf temp-docs",
+    "docs": "shx rm -rf temp-docs && typedoc --plugin typedoc-plugin-markdown --theme markdown --excludeNotExported --target ES6 --out temp-docs && concat-md --decrease-title-levels --dir-name-as-title temp-docs > README.md && shx rm -rf temp-docs",
     "integration-test": "cross-env FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 mocha -r ts-node/register tests/Integration/**/*.spec.ts",
     "unit-test": "mocha -r ts-node/register tests/Unit/**/*.spec.ts"
   },

@@ -1,72 +1,30 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [functional-firestore](#functional-firestore)
-  - [Index](#index)
-    - [Interfaces](#interfaces)
-    - [Variables](#variables)
-    - [Functions](#functions)
-  - [Variables](#variables-1)
-    - [`Const` firestore](#const-firestore)
-    - [`Const` getModelFromCollection](#const-getmodelfromcollection)
-    - [`Const` getModelFromFirestore](#const-getmodelfromfirestore)
-    - [`Const` getModelFromSnapshot](#const-getmodelfromsnapshot)
-    - [`Const` getSnapshotFromCollection](#const-getsnapshotfromcollection)
-    - [`Const` getSnapshotFromDocument](#const-getsnapshotfromdocument)
-    - [`Const` storeModelToCollection](#const-storemodeltocollection)
-    - [`Const` storeModelToDocument](#const-storemodeltodocument)
-    - [`Const` storeModelToFirestore](#const-storemodeltofirestore)
-    - [`Const` validateModel](#const-validatemodel)
-    - [`Const` validateSnapshotExistence](#const-validatesnapshotexistence)
-  - [Functions](#functions-1)
-    - [`Const` clearEmulator](#const-clearemulator)
-    - [`Const` clearFirestore](#const-clearfirestore)
-    - [`Const` fromTask](#const-fromtask)
-    - [`Const` getCollectionFromFirestore](#const-getcollectionfromfirestore)
-    - [`Const` getDataFromSnapshot](#const-getdatafromsnapshot)
-    - [`Const` getDocumentFromCollection](#const-getdocumentfromcollection)
-    - [`Const` getFirestore](#const-getfirestore)
-    - [`Const` getSnapshotFromDocumentTask](#const-getsnapshotfromdocumenttask)
-    - [`Const` id](#const-id)
-    - [`Const` isModel](#const-ismodel)
-    - [`Const` listCollectionsInFirestore](#const-listcollectionsinfirestore)
-    - [`Const` model](#const-model)
-    - [`Const` modelBase](#const-modelbase)
-    - [`Const` modelData](#const-modeldata)
-    - [`Const` models](#const-models)
-    - [`Const` nonModelObject](#const-nonmodelobject)
-    - [`Const` storeModelToDocumentTask](#const-storemodeltodocumenttask)
-    - [`Const` storeModelToFirestoreWith](#const-storemodeltofirestorewith)
-    - [`Const` table](#const-table)
-- [functional-firestore](#functional-firestore-1)
-- [Interfaces](#interfaces-1)
-  - [Interface: Model](#interface-model)
-    - [Hierarchy](#hierarchy)
-    - [Index](#index-1)
-    - [Properties](#properties)
-  - [Interface: Table](#interface-table)
-    - [Hierarchy](#hierarchy-1)
-    - [Index](#index-2)
-    - [Properties](#properties-1)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-
-<a name="globalsmd"></a>
-
-[functional-firestore](#globalsmd)
-
 # functional-firestore
 
-## Index
+## functional-firestore
 
-### Interfaces
+### Modules
 
-* [Model](#interfacesmodelmd)
-* [Table](#interfacestablemd)
+* ["Arbitraries"](#arbitraries)
+* ["Emulator"](#emulator)
+* ["Firestore"](#firestore)
+* ["TaskEitherUtils"](#taskeitherutils)
+* ["index"](#index)
 
-### Variables
+# README
+
+[functional-firestore](#readme) › [Globals](#globals)
+
+## functional-firestore
+
+### functional-firestore
+
+#### Index
+
+##### Interfaces
+
+* [Model](#model)
+
+##### Variables
 
 * [firestore](#const-firestore)
 * [getModelFromCollection](#const-getmodelfromcollection)
@@ -80,7 +38,7 @@
 * [validateModel](#const-validatemodel)
 * [validateSnapshotExistence](#const-validatesnapshotexistence)
 
-### Functions
+##### Functions
 
 * [clearEmulator](#const-clearemulator)
 * [clearFirestore](#const-clearfirestore)
@@ -102,34 +60,38 @@
 * [storeModelToFirestoreWith](#const-storemodeltofirestorewith)
 * [table](#const-table)
 
-## Variables
+#### Variables
 
-### `Const` firestore
+##### `Const` firestore
 
 • **firestore**: *Firestore‹›* = new Firestore({
   projectId: 'gcloud-project',
 })
 
-Defined in src/Emulator.ts:3
+Defined in src/Emulator.ts:7
+
+**`internal`** 
+
+**`type`** {FirebaseFirestore.Firestore}
 
 ___
 
-### `Const` getModelFromCollection
+##### `Const` getModelFromCollection
 
 • **getModelFromCollection**: *function* = pipe(
   getSnapshotFromCollection,
   RTE.chainEitherK(getModelFromSnapshot)
 )
 
-Defined in src/Firestore.ts:202
+Defined in src/Firestore.ts:201
 
-```haskell
+```
 getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#interfacesmodelmd), Error, [Model](#interfacesmodelmd)›*
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#model), Error, [Model](#model)›*
 
 **Parameters:**
 
@@ -139,22 +101,22 @@ Name | Type |
 
 ___
 
-### `Const` getModelFromFirestore
+##### `Const` getModelFromFirestore
 
 • **getModelFromFirestore**: *function* = pipe(
   getCollectionFromFirestore,
   R.map(getModelFromCollection)
 )
 
-Defined in src/Firestore.ts:214
+Defined in src/Firestore.ts:213
 
-```haskell
-getModelFromFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+```
+getModelFromFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`firestore`: Firestore): *Reader‹[Table](#interfacestablemd), ReaderTaskEither‹[Model](#interfacesmodelmd), Error, [Model](#interfacesmodelmd)››*
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#model), Error, [Model](#model)››*
 
 **Parameters:**
 
@@ -164,7 +126,7 @@ Name | Type |
 
 ___
 
-### `Const` getModelFromSnapshot
+##### `Const` getModelFromSnapshot
 
 • **getModelFromSnapshot**: *function* = pipe(
   validateSnapshotExistence,
@@ -172,15 +134,15 @@ ___
   E.chain(validateModel)
 )
 
-Defined in src/Firestore.ts:189
+Defined in src/Firestore.ts:188
 
-```haskell
+```
 getModelFromSnapshot :: Snapshot -> Either Model Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, [Model](#interfacesmodelmd)›*
+▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, [Model](#model)›*
 
 **Parameters:**
 
@@ -190,22 +152,23 @@ Name | Type |
 
 ___
 
-### `Const` getSnapshotFromCollection
+##### `Const` getSnapshotFromCollection
 
 • **getSnapshotFromCollection**: *function* = pipe(
   getDocumentFromCollection,
   R.map(getSnapshotFromDocument)
 )
 
-Defined in src/Firestore.ts:146
+Defined in src/Firestore.ts:144
 
-```haskell
+**`internal`** 
+```
 getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#interfacesmodelmd), Error, DocumentSnapshot›*
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#model), Error, DocumentSnapshot›*
 
 **Parameters:**
 
@@ -215,20 +178,20 @@ Name | Type |
 
 ___
 
-### `Const` getSnapshotFromDocument
+##### `Const` getSnapshotFromDocument
 
 • **getSnapshotFromDocument**: *function* = pipe(
   getSnapshotFromDocumentTask,
   TEUtils.fromTask
 )
 
-Defined in src/Firestore.ts:134
+Defined in src/Firestore.ts:131
 
-```haskell
+```
 getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
 ▸ (`document`: DocumentReference): *TaskEither‹Error, DocumentSnapshot›*
 
@@ -240,22 +203,22 @@ Name | Type |
 
 ___
 
-### `Const` storeModelToCollection
+##### `Const` storeModelToCollection
 
 • **storeModelToCollection**: *function* = pipe(
   getDocumentFromCollection,
   R.chain(storeModelToDocument)
 )
 
-Defined in src/Firestore.ts:85
+Defined in src/Firestore.ts:82
 
-```haskell
-storeModelToCollection :: Collection -> Table -> ReaderTaskEither Model Model Error
+```
+storeModelToCollection :: Collection -> String -> ReaderTaskEither Model Model Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#interfacesmodelmd), Error, [Model](#interfacesmodelmd)›*
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#model), Error, [Model](#model)›*
 
 **Parameters:**
 
@@ -265,22 +228,22 @@ Name | Type |
 
 ___
 
-### `Const` storeModelToDocument
+##### `Const` storeModelToDocument
 
 • **storeModelToDocument**: *function* = pipe(
   storeModelToDocumentTask,
   R.map(TEUtils.fromTask)
 )
 
-Defined in src/Firestore.ts:73
+Defined in src/Firestore.ts:70
 
-```haskell
+```
 storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`document`: DocumentReference): *ReaderTaskEither‹[Model](#interfacesmodelmd), Error, [Model](#interfacesmodelmd)›*
+▸ (`document`: DocumentReference): *ReaderTaskEither‹[Model](#model), Error, [Model](#model)›*
 
 **Parameters:**
 
@@ -290,22 +253,22 @@ Name | Type |
 
 ___
 
-### `Const` storeModelToFirestore
+##### `Const` storeModelToFirestore
 
 • **storeModelToFirestore**: *function* = pipe(
   getCollectionFromFirestore,
   R.map(storeModelToCollection)
 )
 
-Defined in src/Firestore.ts:97
+Defined in src/Firestore.ts:94
 
-```haskell
-storeModelToFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+```
+storeModelToFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`firestore`: Firestore): *Reader‹[Table](#interfacestablemd), ReaderTaskEither‹[Model](#interfacesmodelmd), Error, [Model](#interfacesmodelmd)››*
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#model), Error, [Model](#model)››*
 
 **Parameters:**
 
@@ -315,21 +278,21 @@ Name | Type |
 
 ___
 
-### `Const` validateModel
+##### `Const` validateModel
 
 • **validateModel**: *function* = ifElse(isModel, E.right, () =>
   E.left(new Error('Item is not a valid model.'))
 )
 
-Defined in src/Firestore.ts:178
+Defined in src/Firestore.ts:177
 
-```haskell
+```
 validateModel :: a -> Either Model Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
-▸ (`a`: unknown): *E.Either‹Error, [Model](#interfacesmodelmd)›*
+▸ (`a`: unknown): *E.Either‹Error, [Model](#model)›*
 
 **Parameters:**
 
@@ -339,19 +302,19 @@ Name | Type |
 
 ___
 
-### `Const` validateSnapshotExistence
+##### `Const` validateSnapshotExistence
 
 • **validateSnapshotExistence**: *function* = ifElse(prop('exists'), E.right, () =>
   E.left(new Error('Item does not exist.'))
 )
 
-Defined in src/Firestore.ts:167
+Defined in src/Firestore.ts:166
 
-```haskell
+```
 validateSnapshotExistence :: snapshot -> Either a Error
 ```
 
-#### Type declaration:
+###### Type declaration:
 
 ▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, DocumentSnapshot›*
 
@@ -361,15 +324,15 @@ Name | Type |
 ------ | ------ |
 `snapshot` | DocumentSnapshot |
 
-## Functions
+#### Functions
 
-### `Const` clearEmulator
+##### `Const` clearEmulator
 
 ▸ **clearEmulator**(): *Promise‹void›*
 
-Defined in src/Emulator.ts:26
+Defined in src/Emulator.ts:30
 
-```haskell
+```
 clearFirebase :: () -> Promise
 ```
 
@@ -377,13 +340,13 @@ clearFirebase :: () -> Promise
 
 ___
 
-### `Const` clearFirestore
+##### `Const` clearFirestore
 
 ▸ **clearFirestore**(): *Promise‹void›*
 
-Defined in src/Emulator.ts:19
+Defined in src/Emulator.ts:23
 
-```haskell
+```
 clearFirestore :: () -> Promise
 ```
 
@@ -391,15 +354,11 @@ clearFirestore :: () -> Promise
 
 ___
 
-### `Const` fromTask
+##### `Const` fromTask
 
 ▸ **fromTask**(`task`: Task‹A›): *TaskEither‹Error, A›*
 
-Defined in src/TaskEitherUtils.ts:10
-
-```haskell
-fromThunk :: Task -> TaskEither
-```
+Defined in src/TaskEitherUtils.ts:11
 
 **Parameters:**
 
@@ -411,14 +370,14 @@ Name | Type |
 
 ___
 
-### `Const` getCollectionFromFirestore
+##### `Const` getCollectionFromFirestore
 
 ▸ **getCollectionFromFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:39
+Defined in src/Firestore.ts:35
 
-```haskell
-getCollectionFromFirestore :: Firestore -> Reader Table Collection
+```
+getCollectionFromFirestore :: Firestore -> Reader String Collection
 ```
 
 **Parameters:**
@@ -431,15 +390,11 @@ Name | Type |
 
 ___
 
-### `Const` getDataFromSnapshot
+##### `Const` getDataFromSnapshot
 
 ▸ **getDataFromSnapshot**(`snapshot`: DocumentSnapshot‹object›): *object*
 
-Defined in src/Firestore.ts:158
-
-```haskell
-getDataFromSnapshot :: Snapshot -> a
-```
+Defined in src/Firestore.ts:157
 
 **Parameters:**
 
@@ -453,13 +408,13 @@ Name | Type |
 
 ___
 
-### `Const` getDocumentFromCollection
+##### `Const` getDocumentFromCollection
 
 ▸ **getDocumentFromCollection**(`collection`: CollectionReference‹object›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:50
+Defined in src/Firestore.ts:46
 
-```haskell
+```
 getDocumentFromCollection :: Collection -> Reader Model Document
 ```
 
@@ -473,13 +428,13 @@ Name | Type |
 
 ___
 
-### `Const` getFirestore
+##### `Const` getFirestore
 
 ▸ **getFirestore**(): *Firestore‹›*
 
-Defined in src/Emulator.ts:12
+Defined in src/Emulator.ts:16
 
-```haskell
+```
 getFirestore :: () -> Firestore
 ```
 
@@ -487,13 +442,13 @@ getFirestore :: () -> Firestore
 
 ___
 
-### `Const` getSnapshotFromDocumentTask
+##### `Const` getSnapshotFromDocumentTask
 
 ▸ **getSnapshotFromDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:126
+Defined in src/Firestore.ts:123
 
-```haskell
+```
 getSnapshotFromDocumentTask :: Document -> Task Snapshot
 ```
 
@@ -507,7 +462,7 @@ Name | Type |
 
 ___
 
-### `Const` id
+##### `Const` id
 
 ▸ **id**(): *Arbitrary‹string›*
 
@@ -517,13 +472,13 @@ Defined in src/Arbitraries.ts:4
 
 ___
 
-### `Const` isModel
+##### `Const` isModel
 
 ▸ **isModel**(`a`: unknown): *a is Model*
 
-Defined in src/Firestore.ts:29
+Defined in src/Firestore.ts:25
 
-```haskell
+```
 isModel :: a -> bool
 ```
 
@@ -537,13 +492,13 @@ Name | Type |
 
 ___
 
-### `Const` listCollectionsInFirestore
+##### `Const` listCollectionsInFirestore
 
 ▸ **listCollectionsInFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:228
+Defined in src/Firestore.ts:227
 
-```haskell
+```
 listCollectionsInFirestore :: Firestore -> Task [Collection]
 ```
 
@@ -557,27 +512,27 @@ Name | Type |
 
 ___
 
-### `Const` model
+##### `Const` model
 
-▸ **model**(): *Arbitrary‹[Model](#interfacesmodelmd)›*
+▸ **model**(): *Arbitrary‹[Model](#model)›*
 
 Defined in src/Arbitraries.ts:21
 
-**Returns:** *Arbitrary‹[Model](#interfacesmodelmd)›*
+**Returns:** *Arbitrary‹[Model](#model)›*
 
 ___
 
-### `Const` modelBase
+##### `Const` modelBase
 
-▸ **modelBase**(): *Arbitrary‹[Model](#interfacesmodelmd)›*
+▸ **modelBase**(): *Arbitrary‹[Model](#model)›*
 
 Defined in src/Arbitraries.ts:9
 
-**Returns:** *Arbitrary‹[Model](#interfacesmodelmd)›*
+**Returns:** *Arbitrary‹[Model](#model)›*
 
 ___
 
-### `Const` modelData
+##### `Const` modelData
 
 ▸ **modelData**(): *Arbitrary‹object›*
 
@@ -587,17 +542,17 @@ Defined in src/Arbitraries.ts:14
 
 ___
 
-### `Const` models
+##### `Const` models
 
-▸ **models**(): *Arbitrary‹Array‹[Model](#interfacesmodelmd)››*
+▸ **models**(): *Arbitrary‹Array‹[Model](#model)››*
 
 Defined in src/Arbitraries.ts:26
 
-**Returns:** *Arbitrary‹Array‹[Model](#interfacesmodelmd)››*
+**Returns:** *Arbitrary‹Array‹[Model](#model)››*
 
 ___
 
-### `Const` nonModelObject
+##### `Const` nonModelObject
 
 ▸ **nonModelObject**(): *Arbitrary‹unknown›*
 
@@ -607,15 +562,11 @@ Defined in src/Arbitraries.ts:6
 
 ___
 
-### `Const` storeModelToDocumentTask
+##### `Const` storeModelToDocumentTask
 
 ▸ **storeModelToDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
 
-Defined in src/Firestore.ts:61
-
-```haskell
-storeModelToDocumentTask :: Document -> Reader Model (Task Model)
-```
+Defined in src/Firestore.ts:58
 
 **Parameters:**
 
@@ -627,14 +578,14 @@ Name | Type |
 
 ___
 
-### `Const` storeModelToFirestoreWith
+##### `Const` storeModelToFirestoreWith
 
 ▸ **storeModelToFirestoreWith**<**A**>(`firestore`: any): *(Anonymous function)*
 
-Defined in src/Firestore.ts:114
+Defined in src/Firestore.ts:111
 
-```haskell
-storeModelToFirestoreWith :: Firestore -> Reader Table (ReaderTaskEither (() -> Model) Model Error)
+```
+storeModelToFirestoreWith :: Firestore -> Reader String (ReaderTaskEither (() -> Model) Model Error)
 ```
 
 **Type parameters:**
@@ -651,28 +602,1348 @@ Name | Type |
 
 ___
 
-### `Const` table
+##### `Const` table
 
-▸ **table**(): *Arbitrary‹[Table](#interfacestablemd)›*
+▸ **table**(): *Arbitrary‹string›*
 
 Defined in src/Arbitraries.ts:28
 
-**Returns:** *Arbitrary‹[Table](#interfacestablemd)›*
+**Returns:** *Arbitrary‹string›*
 
+## README
 
-<a name="readmemd"></a>
+[functional-firestore](#readme) › [Globals](#globals)
 
-[functional-firestore](#globalsmd)
+### functional-firestore
 
-# functional-firestore
+### Globals
 
+[functional-firestore](#globals)
+
+#### functional-firestore
+
+##### Index
+
+###### Interfaces
+
+* [Model](#model)
+
+###### Variables
+
+* [firestore](#const-firestore)
+* [getModelFromCollection](#const-getmodelfromcollection)
+* [getModelFromFirestore](#const-getmodelfromfirestore)
+* [getModelFromSnapshot](#const-getmodelfromsnapshot)
+* [getSnapshotFromCollection](#const-getsnapshotfromcollection)
+* [getSnapshotFromDocument](#const-getsnapshotfromdocument)
+* [storeModelToCollection](#const-storemodeltocollection)
+* [storeModelToDocument](#const-storemodeltodocument)
+* [storeModelToFirestore](#const-storemodeltofirestore)
+* [validateModel](#const-validatemodel)
+* [validateSnapshotExistence](#const-validatesnapshotexistence)
+
+###### Functions
+
+* [clearEmulator](#const-clearemulator)
+* [clearFirestore](#const-clearfirestore)
+* [fromTask](#const-fromtask)
+* [getCollectionFromFirestore](#const-getcollectionfromfirestore)
+* [getDataFromSnapshot](#const-getdatafromsnapshot)
+* [getDocumentFromCollection](#const-getdocumentfromcollection)
+* [getFirestore](#const-getfirestore)
+* [getSnapshotFromDocumentTask](#const-getsnapshotfromdocumenttask)
+* [id](#const-id)
+* [isModel](#const-ismodel)
+* [listCollectionsInFirestore](#const-listcollectionsinfirestore)
+* [model](#const-model)
+* [modelBase](#const-modelbase)
+* [modelData](#const-modeldata)
+* [models](#const-models)
+* [nonModelObject](#const-nonmodelobject)
+* [storeModelToDocumentTask](#const-storemodeltodocumenttask)
+* [storeModelToFirestoreWith](#const-storemodeltofirestorewith)
+* [table](#const-table)
+
+##### Variables
+
+###### `Const` firestore
+
+• **firestore**: *Firestore‹›* = new Firestore({
+  projectId: 'gcloud-project',
+})
+
+Defined in src/Emulator.ts:7
+
+**`internal`** 
+
+**`type`** {FirebaseFirestore.Firestore}
+
+___
+
+###### `Const` getModelFromCollection
+
+• **getModelFromCollection**: *function* = pipe(
+  getSnapshotFromCollection,
+  RTE.chainEitherK(getModelFromSnapshot)
+)
+
+Defined in src/Firestore.ts:201
+
+```
+getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
+```
+
+####### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#model), Error, [Model](#model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+###### `Const` getModelFromFirestore
+
+• **getModelFromFirestore**: *function* = pipe(
+  getCollectionFromFirestore,
+  R.map(getModelFromCollection)
+)
+
+Defined in src/Firestore.ts:213
+
+```
+getModelFromFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
+```
+
+####### Type declaration:
+
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#model), Error, [Model](#model)››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore |
+
+___
+
+###### `Const` getModelFromSnapshot
+
+• **getModelFromSnapshot**: *function* = pipe(
+  validateSnapshotExistence,
+  E.map(getDataFromSnapshot),
+  E.chain(validateModel)
+)
+
+Defined in src/Firestore.ts:188
+
+```
+getModelFromSnapshot :: Snapshot -> Either Model Error
+```
+
+####### Type declaration:
+
+▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, [Model](#model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`snapshot` | DocumentSnapshot |
+
+___
+
+###### `Const` getSnapshotFromCollection
+
+• **getSnapshotFromCollection**: *function* = pipe(
+  getDocumentFromCollection,
+  R.map(getSnapshotFromDocument)
+)
+
+Defined in src/Firestore.ts:144
+
+**`internal`** 
+```
+getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
+```
+
+####### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#model), Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+###### `Const` getSnapshotFromDocument
+
+• **getSnapshotFromDocument**: *function* = pipe(
+  getSnapshotFromDocumentTask,
+  TEUtils.fromTask
+)
+
+Defined in src/Firestore.ts:131
+
+```
+getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
+```
+
+####### Type declaration:
+
+▸ (`document`: DocumentReference): *TaskEither‹Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference |
+
+___
+
+###### `Const` storeModelToCollection
+
+• **storeModelToCollection**: *function* = pipe(
+  getDocumentFromCollection,
+  R.chain(storeModelToDocument)
+)
+
+Defined in src/Firestore.ts:82
+
+```
+storeModelToCollection :: Collection -> String -> ReaderTaskEither Model Model Error
+```
+
+####### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#model), Error, [Model](#model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+###### `Const` storeModelToDocument
+
+• **storeModelToDocument**: *function* = pipe(
+  storeModelToDocumentTask,
+  R.map(TEUtils.fromTask)
+)
+
+Defined in src/Firestore.ts:70
+
+```
+storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
+```
+
+####### Type declaration:
+
+▸ (`document`: DocumentReference): *ReaderTaskEither‹[Model](#model), Error, [Model](#model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference |
+
+___
+
+###### `Const` storeModelToFirestore
+
+• **storeModelToFirestore**: *function* = pipe(
+  getCollectionFromFirestore,
+  R.map(storeModelToCollection)
+)
+
+Defined in src/Firestore.ts:94
+
+```
+storeModelToFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
+```
+
+####### Type declaration:
+
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#model), Error, [Model](#model)››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore |
+
+___
+
+###### `Const` validateModel
+
+• **validateModel**: *function* = ifElse(isModel, E.right, () =>
+  E.left(new Error('Item is not a valid model.'))
+)
+
+Defined in src/Firestore.ts:177
+
+```
+validateModel :: a -> Either Model Error
+```
+
+####### Type declaration:
+
+▸ (`a`: unknown): *E.Either‹Error, [Model](#model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | unknown |
+
+___
+
+###### `Const` validateSnapshotExistence
+
+• **validateSnapshotExistence**: *function* = ifElse(prop('exists'), E.right, () =>
+  E.left(new Error('Item does not exist.'))
+)
+
+Defined in src/Firestore.ts:166
+
+```
+validateSnapshotExistence :: snapshot -> Either a Error
+```
+
+####### Type declaration:
+
+▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`snapshot` | DocumentSnapshot |
+
+##### Functions
+
+###### `Const` clearEmulator
+
+▸ **clearEmulator**(): *Promise‹void›*
+
+Defined in src/Emulator.ts:30
+
+```
+clearFirebase :: () -> Promise
+```
+
+**Returns:** *Promise‹void›*
+
+___
+
+###### `Const` clearFirestore
+
+▸ **clearFirestore**(): *Promise‹void›*
+
+Defined in src/Emulator.ts:23
+
+```
+clearFirestore :: () -> Promise
+```
+
+**Returns:** *Promise‹void›*
+
+___
+
+###### `Const` fromTask
+
+▸ **fromTask**(`task`: Task‹A›): *TaskEither‹Error, A›*
+
+Defined in src/TaskEitherUtils.ts:11
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`task` | Task‹A› |
+
+**Returns:** *TaskEither‹Error, A›*
+
+___
+
+###### `Const` getCollectionFromFirestore
+
+▸ **getCollectionFromFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:35
+
+```
+getCollectionFromFirestore :: Firestore -> Reader String Collection
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore‹› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+###### `Const` getDataFromSnapshot
+
+▸ **getDataFromSnapshot**(`snapshot`: DocumentSnapshot‹object›): *object*
+
+Defined in src/Firestore.ts:157
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`snapshot` | DocumentSnapshot‹object› |
+
+**Returns:** *object*
+
+* \[ **field**: *string*\]: any
+
+___
+
+###### `Const` getDocumentFromCollection
+
+▸ **getDocumentFromCollection**(`collection`: CollectionReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:46
+
+```
+getDocumentFromCollection :: Collection -> Reader Model Document
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+###### `Const` getFirestore
+
+▸ **getFirestore**(): *Firestore‹›*
+
+Defined in src/Emulator.ts:16
+
+```
+getFirestore :: () -> Firestore
+```
+
+**Returns:** *Firestore‹›*
+
+___
+
+###### `Const` getSnapshotFromDocumentTask
+
+▸ **getSnapshotFromDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:123
+
+```
+getSnapshotFromDocumentTask :: Document -> Task Snapshot
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+###### `Const` id
+
+▸ **id**(): *Arbitrary‹string›*
+
+Defined in src/Arbitraries.ts:4
+
+**Returns:** *Arbitrary‹string›*
+
+___
+
+###### `Const` isModel
+
+▸ **isModel**(`a`: unknown): *a is Model*
+
+Defined in src/Firestore.ts:25
+
+```
+isModel :: a -> bool
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | unknown |
+
+**Returns:** *a is Model*
+
+___
+
+###### `Const` listCollectionsInFirestore
+
+▸ **listCollectionsInFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:227
+
+```
+listCollectionsInFirestore :: Firestore -> Task [Collection]
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore‹› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+###### `Const` model
+
+▸ **model**(): *Arbitrary‹[Model](#model)›*
+
+Defined in src/Arbitraries.ts:21
+
+**Returns:** *Arbitrary‹[Model](#model)›*
+
+___
+
+###### `Const` modelBase
+
+▸ **modelBase**(): *Arbitrary‹[Model](#model)›*
+
+Defined in src/Arbitraries.ts:9
+
+**Returns:** *Arbitrary‹[Model](#model)›*
+
+___
+
+###### `Const` modelData
+
+▸ **modelData**(): *Arbitrary‹object›*
+
+Defined in src/Arbitraries.ts:14
+
+**Returns:** *Arbitrary‹object›*
+
+___
+
+###### `Const` models
+
+▸ **models**(): *Arbitrary‹Array‹[Model](#model)››*
+
+Defined in src/Arbitraries.ts:26
+
+**Returns:** *Arbitrary‹Array‹[Model](#model)››*
+
+___
+
+###### `Const` nonModelObject
+
+▸ **nonModelObject**(): *Arbitrary‹unknown›*
+
+Defined in src/Arbitraries.ts:6
+
+**Returns:** *Arbitrary‹unknown›*
+
+___
+
+###### `Const` storeModelToDocumentTask
+
+▸ **storeModelToDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:58
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+###### `Const` storeModelToFirestoreWith
+
+▸ **storeModelToFirestoreWith**<**A**>(`firestore`: any): *(Anonymous function)*
+
+Defined in src/Firestore.ts:111
+
+```
+storeModelToFirestoreWith :: Firestore -> Reader String (ReaderTaskEither (() -> Model) Model Error)
+```
+
+**Type parameters:**
+
+▪ **A**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | any |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+###### `Const` table
+
+▸ **table**(): *Arbitrary‹string›*
+
+Defined in src/Arbitraries.ts:28
+
+**Returns:** *Arbitrary‹string›*
+
+### README
+
+[functional-firestore](#globals)
+
+#### functional-firestore
+
+### Model
+
+[functional-firestore](#globals) › [Model](#model)
+
+#### Interface: Model
+
+##### Hierarchy
+
+* **Model**
+
+##### Index
+
+###### Properties
+
+* [id](#id)
+
+##### Properties
+
+######  id
+
+• **id**: *string*
+
+Defined in src/Firestore.ts:17
+
+## Model
+
+[functional-firestore](#readme) › [Globals](#globals) › [Model](#model)
+
+### Interface: Model
+
+#### Hierarchy
+
+* **Model**
+
+#### Index
+
+##### Properties
+
+* [id](#id)
+
+#### Properties
+
+#####  id
+
+• **id**: *string*
+
+Defined in src/Firestore.ts:17
+
+# Interfaces
+
+## Firestore Model
+
+[functional-firestore](#readme) › [Globals](#globals) › ["Firestore"](#firestore) › [Model](#firestore-model)
+
+### Interface: Model
+
+#### Hierarchy
+
+* **Model**
+
+#### Index
+
+##### Properties
+
+* [id](#id)
+
+#### Properties
+
+#####  id
+
+• **id**: *string*
+
+Defined in src/Firestore.ts:17
+
+# Modules
+
+## Arbitraries
+
+[functional-firestore](#readme) › [Globals](#globals) › ["Arbitraries"](#arbitraries)
+
+### External module: "Arbitraries"
+
+#### Index
+
+##### Functions
+
+* [id](#const-id)
+* [model](#const-model)
+* [modelBase](#const-modelbase)
+* [modelData](#const-modeldata)
+* [models](#const-models)
+* [nonModelObject](#const-nonmodelobject)
+* [table](#const-table)
+
+#### Functions
+
+##### `Const` id
+
+▸ **id**(): *Arbitrary‹string›*
+
+Defined in src/Arbitraries.ts:4
+
+**Returns:** *Arbitrary‹string›*
+
+___
+
+##### `Const` model
+
+▸ **model**(): *Arbitrary‹[Model](#firestore-model)›*
+
+Defined in src/Arbitraries.ts:21
+
+**Returns:** *Arbitrary‹[Model](#firestore-model)›*
+
+___
+
+##### `Const` modelBase
+
+▸ **modelBase**(): *Arbitrary‹[Model](#firestore-model)›*
+
+Defined in src/Arbitraries.ts:9
+
+**Returns:** *Arbitrary‹[Model](#firestore-model)›*
+
+___
+
+##### `Const` modelData
+
+▸ **modelData**(): *Arbitrary‹object›*
+
+Defined in src/Arbitraries.ts:14
+
+**Returns:** *Arbitrary‹object›*
+
+___
+
+##### `Const` models
+
+▸ **models**(): *Arbitrary‹Array‹[Model](#firestore-model)››*
+
+Defined in src/Arbitraries.ts:26
+
+**Returns:** *Arbitrary‹Array‹[Model](#firestore-model)››*
+
+___
+
+##### `Const` nonModelObject
+
+▸ **nonModelObject**(): *Arbitrary‹unknown›*
+
+Defined in src/Arbitraries.ts:6
+
+**Returns:** *Arbitrary‹unknown›*
+
+___
+
+##### `Const` table
+
+▸ **table**(): *Arbitrary‹string›*
+
+Defined in src/Arbitraries.ts:28
+
+**Returns:** *Arbitrary‹string›*
+
+## Emulator
+
+[functional-firestore](#readme) › [Globals](#globals) › ["Emulator"](#emulator)
+
+### External module: "Emulator"
+
+#### Index
+
+##### Functions
+
+* [clearEmulator](#const-clearemulator)
+* [clearFirestore](#const-clearfirestore)
+* [getFirestore](#const-getfirestore)
+
+#### Functions
+
+##### `Const` clearEmulator
+
+▸ **clearEmulator**(): *Promise‹void›*
+
+Defined in src/Emulator.ts:30
+
+```
+clearFirebase :: () -> Promise
+```
+
+**Returns:** *Promise‹void›*
+
+___
+
+##### `Const` clearFirestore
+
+▸ **clearFirestore**(): *Promise‹void›*
+
+Defined in src/Emulator.ts:23
+
+```
+clearFirestore :: () -> Promise
+```
+
+**Returns:** *Promise‹void›*
+
+___
+
+##### `Const` getFirestore
+
+▸ **getFirestore**(): *Firestore‹›*
+
+Defined in src/Emulator.ts:16
+
+```
+getFirestore :: () -> Firestore
+```
+
+**Returns:** *Firestore‹›*
+
+## Firestore
+
+[functional-firestore](#readme) › [Globals](#globals) › ["Firestore"](#firestore)
+
+### External module: "Firestore"
+
+#### Index
+
+##### Interfaces
+
+* [Model](#firestore-model)
+
+##### Variables
+
+* [getModelFromCollection](#const-getmodelfromcollection)
+* [getModelFromFirestore](#const-getmodelfromfirestore)
+* [getSnapshotFromDocument](#const-getsnapshotfromdocument)
+* [storeModelToCollection](#const-storemodeltocollection)
+* [storeModelToDocument](#const-storemodeltodocument)
+* [storeModelToFirestore](#const-storemodeltofirestore)
+* [validateModel](#const-validatemodel)
+* [validateSnapshotExistence](#const-validatesnapshotexistence)
+
+##### Functions
+
+* [getCollectionFromFirestore](#const-getcollectionfromfirestore)
+* [getDocumentFromCollection](#const-getdocumentfromcollection)
+* [getSnapshotFromDocumentTask](#const-getsnapshotfromdocumenttask)
+* [isModel](#const-ismodel)
+* [listCollectionsInFirestore](#const-listcollectionsinfirestore)
+* [storeModelToFirestoreWith](#const-storemodeltofirestorewith)
+
+#### Variables
+
+##### `Const` getModelFromCollection
+
+• **getModelFromCollection**: *function* = pipe(
+  getSnapshotFromCollection,
+  RTE.chainEitherK(getModelFromSnapshot)
+)
+
+Defined in src/Firestore.ts:201
+
+```
+getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
+```
+
+###### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#firestore-model), Error, [Model](#firestore-model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+##### `Const` getModelFromFirestore
+
+• **getModelFromFirestore**: *function* = pipe(
+  getCollectionFromFirestore,
+  R.map(getModelFromCollection)
+)
+
+Defined in src/Firestore.ts:213
+
+```
+getModelFromFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
+```
+
+###### Type declaration:
+
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#firestore-model), Error, [Model](#firestore-model)››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore |
+
+___
+
+##### `Const` getSnapshotFromDocument
+
+• **getSnapshotFromDocument**: *function* = pipe(
+  getSnapshotFromDocumentTask,
+  TEUtils.fromTask
+)
+
+Defined in src/Firestore.ts:131
+
+```
+getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
+```
+
+###### Type declaration:
+
+▸ (`document`: DocumentReference): *TaskEither‹Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference |
+
+___
+
+##### `Const` storeModelToCollection
+
+• **storeModelToCollection**: *function* = pipe(
+  getDocumentFromCollection,
+  R.chain(storeModelToDocument)
+)
+
+Defined in src/Firestore.ts:82
+
+```
+storeModelToCollection :: Collection -> String -> ReaderTaskEither Model Model Error
+```
+
+###### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#firestore-model), Error, [Model](#firestore-model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+##### `Const` storeModelToDocument
+
+• **storeModelToDocument**: *function* = pipe(
+  storeModelToDocumentTask,
+  R.map(TEUtils.fromTask)
+)
+
+Defined in src/Firestore.ts:70
+
+```
+storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
+```
+
+###### Type declaration:
+
+▸ (`document`: DocumentReference): *ReaderTaskEither‹[Model](#firestore-model), Error, [Model](#firestore-model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference |
+
+___
+
+##### `Const` storeModelToFirestore
+
+• **storeModelToFirestore**: *function* = pipe(
+  getCollectionFromFirestore,
+  R.map(storeModelToCollection)
+)
+
+Defined in src/Firestore.ts:94
+
+```
+storeModelToFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
+```
+
+###### Type declaration:
+
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#firestore-model), Error, [Model](#firestore-model)››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore |
+
+___
+
+##### `Const` validateModel
+
+• **validateModel**: *function* = ifElse(isModel, E.right, () =>
+  E.left(new Error('Item is not a valid model.'))
+)
+
+Defined in src/Firestore.ts:177
+
+```
+validateModel :: a -> Either Model Error
+```
+
+###### Type declaration:
+
+▸ (`a`: unknown): *E.Either‹Error, [Model](#firestore-model)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | unknown |
+
+___
+
+##### `Const` validateSnapshotExistence
+
+• **validateSnapshotExistence**: *function* = ifElse(prop('exists'), E.right, () =>
+  E.left(new Error('Item does not exist.'))
+)
+
+Defined in src/Firestore.ts:166
+
+```
+validateSnapshotExistence :: snapshot -> Either a Error
+```
+
+###### Type declaration:
+
+▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`snapshot` | DocumentSnapshot |
+
+#### Functions
+
+##### `Const` getCollectionFromFirestore
+
+▸ **getCollectionFromFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:35
+
+```
+getCollectionFromFirestore :: Firestore -> Reader String Collection
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore‹› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+##### `Const` getDocumentFromCollection
+
+▸ **getDocumentFromCollection**(`collection`: CollectionReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:46
+
+```
+getDocumentFromCollection :: Collection -> Reader Model Document
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+##### `Const` getSnapshotFromDocumentTask
+
+▸ **getSnapshotFromDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:123
+
+```
+getSnapshotFromDocumentTask :: Document -> Task Snapshot
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+##### `Const` isModel
+
+▸ **isModel**(`a`: unknown): *a is Model*
+
+Defined in src/Firestore.ts:25
+
+```
+isModel :: a -> bool
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | unknown |
+
+**Returns:** *a is Model*
+
+___
+
+##### `Const` listCollectionsInFirestore
+
+▸ **listCollectionsInFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:227
+
+```
+listCollectionsInFirestore :: Firestore -> Task [Collection]
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore‹› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+##### `Const` storeModelToFirestoreWith
+
+▸ **storeModelToFirestoreWith**<**A**>(`firestore`: any): *(Anonymous function)*
+
+Defined in src/Firestore.ts:111
+
+```
+storeModelToFirestoreWith :: Firestore -> Reader String (ReaderTaskEither (() -> Model) Model Error)
+```
+
+**Type parameters:**
+
+▪ **A**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | any |
+
+**Returns:** *(Anonymous function)*
+
+## Index
+
+[functional-firestore](#readme) › [Globals](#globals) › ["index"](#index)
+
+### External module: "index"
+
+#### Index
+
+##### References
+
+* [Model](#model)
+* [getCollectionFromFirestore](#getcollectionfromfirestore)
+* [getDocumentFromCollection](#getdocumentfromcollection)
+* [getModelFromCollection](#getmodelfromcollection)
+* [getModelFromFirestore](#getmodelfromfirestore)
+* [getSnapshotFromDocument](#getsnapshotfromdocument)
+* [getSnapshotFromDocumentTask](#getsnapshotfromdocumenttask)
+* [isModel](#ismodel)
+* [listCollectionsInFirestore](#listcollectionsinfirestore)
+* [storeModelToCollection](#storemodeltocollection)
+* [storeModelToDocument](#storemodeltodocument)
+* [storeModelToFirestore](#storemodeltofirestore)
+* [storeModelToFirestoreWith](#storemodeltofirestorewith)
+* [validateModel](#validatemodel)
+* [validateSnapshotExistence](#validatesnapshotexistence)
+
+#### References
+
+#####  Model
+
+• **Model**:
+
+___
+
+#####  getCollectionFromFirestore
+
+• **getCollectionFromFirestore**:
+
+___
+
+#####  getDocumentFromCollection
+
+• **getDocumentFromCollection**:
+
+___
+
+#####  getModelFromCollection
+
+• **getModelFromCollection**:
+
+___
+
+#####  getModelFromFirestore
+
+• **getModelFromFirestore**:
+
+___
+
+#####  getSnapshotFromDocument
+
+• **getSnapshotFromDocument**:
+
+___
+
+#####  getSnapshotFromDocumentTask
+
+• **getSnapshotFromDocumentTask**:
+
+___
+
+#####  isModel
+
+• **isModel**:
+
+___
+
+#####  listCollectionsInFirestore
+
+• **listCollectionsInFirestore**:
+
+___
+
+#####  storeModelToCollection
+
+• **storeModelToCollection**:
+
+___
+
+#####  storeModelToDocument
+
+• **storeModelToDocument**:
+
+___
+
+#####  storeModelToFirestore
+
+• **storeModelToFirestore**:
+
+___
+
+#####  storeModelToFirestoreWith
+
+• **storeModelToFirestoreWith**:
+
+___
+
+#####  validateModel
+
+• **validateModel**:
+
+___
+
+#####  validateSnapshotExistence
+
+• **validateSnapshotExistence**:
+
+## Taskeitherutils
+
+[functional-firestore](#readme) › [Globals](#globals) › ["TaskEitherUtils"](#taskeitherutils)
+
+### External module: "TaskEitherUtils"
+
+#### Index
+
+##### Functions
+
+* [fromTask](#const-fromtask)
+
+#### Functions
+
+##### `Const` fromTask
+
+▸ **fromTask**(`task`: Task‹A›): *TaskEither‹Error, A›*
+
+Defined in src/TaskEitherUtils.ts:11
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`task` | Task‹A› |
+
+**Returns:** *TaskEither‹Error, A›*
 
 # Interfaces
 
 
-<a name="interfacesmodelmd"></a>
+<a name="interfaces_firestore_modelmd"></a>
 
-[functional-firestore](#globalsmd) › [Model](#interfacesmodelmd)
+[functional-firestore](#readmemd) › [Globals](#globalsmd) › ["Firestore"](#modules_firestore_md) › [Model](#interfaces_firestore_modelmd)
 
 ## Interface: Model
 
@@ -694,27 +1965,651 @@ Defined in src/Arbitraries.ts:28
 
 Defined in src/Firestore.ts:17
 
+# Modules
 
-<a name="interfacestablemd"></a>
 
-[functional-firestore](#globalsmd) › [Table](#interfacestablemd)
+<a name="modules_arbitraries_md"></a>
 
-## Interface: Table
+[functional-firestore](#readmemd) › [Globals](#globalsmd) › ["Arbitraries"](#modules_arbitraries_md)
 
-### Hierarchy
-
-* **Table**
+## External module: "Arbitraries"
 
 ### Index
 
-#### Properties
+#### Functions
 
-* [name](#name)
+* [id](#const-id)
+* [model](#const-model)
+* [modelBase](#const-modelbase)
+* [modelData](#const-modeldata)
+* [models](#const-models)
+* [nonModelObject](#const-nonmodelobject)
+* [table](#const-table)
 
-### Properties
+### Functions
 
-####  name
+#### `Const` id
 
-• **name**: *string*
+▸ **id**(): *Arbitrary‹string›*
 
-Defined in src/Firestore.ts:21
+Defined in src/Arbitraries.ts:4
+
+**Returns:** *Arbitrary‹string›*
+
+___
+
+#### `Const` model
+
+▸ **model**(): *Arbitrary‹[Model](#interfaces_firestore_modelmd)›*
+
+Defined in src/Arbitraries.ts:21
+
+**Returns:** *Arbitrary‹[Model](#interfaces_firestore_modelmd)›*
+
+___
+
+#### `Const` modelBase
+
+▸ **modelBase**(): *Arbitrary‹[Model](#interfaces_firestore_modelmd)›*
+
+Defined in src/Arbitraries.ts:9
+
+**Returns:** *Arbitrary‹[Model](#interfaces_firestore_modelmd)›*
+
+___
+
+#### `Const` modelData
+
+▸ **modelData**(): *Arbitrary‹object›*
+
+Defined in src/Arbitraries.ts:14
+
+**Returns:** *Arbitrary‹object›*
+
+___
+
+#### `Const` models
+
+▸ **models**(): *Arbitrary‹Array‹[Model](#interfaces_firestore_modelmd)››*
+
+Defined in src/Arbitraries.ts:26
+
+**Returns:** *Arbitrary‹Array‹[Model](#interfaces_firestore_modelmd)››*
+
+___
+
+#### `Const` nonModelObject
+
+▸ **nonModelObject**(): *Arbitrary‹unknown›*
+
+Defined in src/Arbitraries.ts:6
+
+**Returns:** *Arbitrary‹unknown›*
+
+___
+
+#### `Const` table
+
+▸ **table**(): *Arbitrary‹string›*
+
+Defined in src/Arbitraries.ts:28
+
+**Returns:** *Arbitrary‹string›*
+
+
+<a name="modules_emulator_md"></a>
+
+[functional-firestore](#readmemd) › [Globals](#globalsmd) › ["Emulator"](#modules_emulator_md)
+
+## External module: "Emulator"
+
+### Index
+
+#### Functions
+
+* [clearEmulator](#const-clearemulator)
+* [clearFirestore](#const-clearfirestore)
+* [getFirestore](#const-getfirestore)
+
+### Functions
+
+#### `Const` clearEmulator
+
+▸ **clearEmulator**(): *Promise‹void›*
+
+Defined in src/Emulator.ts:30
+
+```
+clearFirebase :: () -> Promise
+```
+
+**Returns:** *Promise‹void›*
+
+___
+
+#### `Const` clearFirestore
+
+▸ **clearFirestore**(): *Promise‹void›*
+
+Defined in src/Emulator.ts:23
+
+```
+clearFirestore :: () -> Promise
+```
+
+**Returns:** *Promise‹void›*
+
+___
+
+#### `Const` getFirestore
+
+▸ **getFirestore**(): *Firestore‹›*
+
+Defined in src/Emulator.ts:16
+
+```
+getFirestore :: () -> Firestore
+```
+
+**Returns:** *Firestore‹›*
+
+
+<a name="modules_firestore_md"></a>
+
+[functional-firestore](#readmemd) › [Globals](#globalsmd) › ["Firestore"](#modules_firestore_md)
+
+## External module: "Firestore"
+
+### Index
+
+#### Interfaces
+
+* [Model](#interfaces_firestore_modelmd)
+
+#### Variables
+
+* [getModelFromCollection](#const-getmodelfromcollection)
+* [getModelFromFirestore](#const-getmodelfromfirestore)
+* [getSnapshotFromDocument](#const-getsnapshotfromdocument)
+* [storeModelToCollection](#const-storemodeltocollection)
+* [storeModelToDocument](#const-storemodeltodocument)
+* [storeModelToFirestore](#const-storemodeltofirestore)
+* [validateModel](#const-validatemodel)
+* [validateSnapshotExistence](#const-validatesnapshotexistence)
+
+#### Functions
+
+* [getCollectionFromFirestore](#const-getcollectionfromfirestore)
+* [getDocumentFromCollection](#const-getdocumentfromcollection)
+* [getSnapshotFromDocumentTask](#const-getsnapshotfromdocumenttask)
+* [isModel](#const-ismodel)
+* [listCollectionsInFirestore](#const-listcollectionsinfirestore)
+* [storeModelToFirestoreWith](#const-storemodeltofirestorewith)
+
+### Variables
+
+#### `Const` getModelFromCollection
+
+• **getModelFromCollection**: *function* = pipe(
+  getSnapshotFromCollection,
+  RTE.chainEitherK(getModelFromSnapshot)
+)
+
+Defined in src/Firestore.ts:201
+
+```
+getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
+```
+
+##### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#interfaces_firestore_modelmd), Error, [Model](#interfaces_firestore_modelmd)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+#### `Const` getModelFromFirestore
+
+• **getModelFromFirestore**: *function* = pipe(
+  getCollectionFromFirestore,
+  R.map(getModelFromCollection)
+)
+
+Defined in src/Firestore.ts:213
+
+```
+getModelFromFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
+```
+
+##### Type declaration:
+
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#interfaces_firestore_modelmd), Error, [Model](#interfaces_firestore_modelmd)››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore |
+
+___
+
+#### `Const` getSnapshotFromDocument
+
+• **getSnapshotFromDocument**: *function* = pipe(
+  getSnapshotFromDocumentTask,
+  TEUtils.fromTask
+)
+
+Defined in src/Firestore.ts:131
+
+```
+getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
+```
+
+##### Type declaration:
+
+▸ (`document`: DocumentReference): *TaskEither‹Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference |
+
+___
+
+#### `Const` storeModelToCollection
+
+• **storeModelToCollection**: *function* = pipe(
+  getDocumentFromCollection,
+  R.chain(storeModelToDocument)
+)
+
+Defined in src/Firestore.ts:82
+
+```
+storeModelToCollection :: Collection -> String -> ReaderTaskEither Model Model Error
+```
+
+##### Type declaration:
+
+▸ (`collection`: CollectionReference): *ReaderTaskEither‹[Model](#interfaces_firestore_modelmd), Error, [Model](#interfaces_firestore_modelmd)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference |
+
+___
+
+#### `Const` storeModelToDocument
+
+• **storeModelToDocument**: *function* = pipe(
+  storeModelToDocumentTask,
+  R.map(TEUtils.fromTask)
+)
+
+Defined in src/Firestore.ts:70
+
+```
+storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
+```
+
+##### Type declaration:
+
+▸ (`document`: DocumentReference): *ReaderTaskEither‹[Model](#interfaces_firestore_modelmd), Error, [Model](#interfaces_firestore_modelmd)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference |
+
+___
+
+#### `Const` storeModelToFirestore
+
+• **storeModelToFirestore**: *function* = pipe(
+  getCollectionFromFirestore,
+  R.map(storeModelToCollection)
+)
+
+Defined in src/Firestore.ts:94
+
+```
+storeModelToFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
+```
+
+##### Type declaration:
+
+▸ (`firestore`: Firestore): *Reader‹string, ReaderTaskEither‹[Model](#interfaces_firestore_modelmd), Error, [Model](#interfaces_firestore_modelmd)››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore |
+
+___
+
+#### `Const` validateModel
+
+• **validateModel**: *function* = ifElse(isModel, E.right, () =>
+  E.left(new Error('Item is not a valid model.'))
+)
+
+Defined in src/Firestore.ts:177
+
+```
+validateModel :: a -> Either Model Error
+```
+
+##### Type declaration:
+
+▸ (`a`: unknown): *E.Either‹Error, [Model](#interfaces_firestore_modelmd)›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | unknown |
+
+___
+
+#### `Const` validateSnapshotExistence
+
+• **validateSnapshotExistence**: *function* = ifElse(prop('exists'), E.right, () =>
+  E.left(new Error('Item does not exist.'))
+)
+
+Defined in src/Firestore.ts:166
+
+```
+validateSnapshotExistence :: snapshot -> Either a Error
+```
+
+##### Type declaration:
+
+▸ (`snapshot`: DocumentSnapshot): *E.Either‹Error, DocumentSnapshot›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`snapshot` | DocumentSnapshot |
+
+### Functions
+
+#### `Const` getCollectionFromFirestore
+
+▸ **getCollectionFromFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:35
+
+```
+getCollectionFromFirestore :: Firestore -> Reader String Collection
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore‹› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+#### `Const` getDocumentFromCollection
+
+▸ **getDocumentFromCollection**(`collection`: CollectionReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:46
+
+```
+getDocumentFromCollection :: Collection -> Reader Model Document
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`collection` | CollectionReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+#### `Const` getSnapshotFromDocumentTask
+
+▸ **getSnapshotFromDocumentTask**(`document`: DocumentReference‹object›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:123
+
+```
+getSnapshotFromDocumentTask :: Document -> Task Snapshot
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`document` | DocumentReference‹object› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+#### `Const` isModel
+
+▸ **isModel**(`a`: unknown): *a is Model*
+
+Defined in src/Firestore.ts:25
+
+```
+isModel :: a -> bool
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | unknown |
+
+**Returns:** *a is Model*
+
+___
+
+#### `Const` listCollectionsInFirestore
+
+▸ **listCollectionsInFirestore**(`firestore`: Firestore‹›): *(Anonymous function)*
+
+Defined in src/Firestore.ts:227
+
+```
+listCollectionsInFirestore :: Firestore -> Task [Collection]
+```
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | Firestore‹› |
+
+**Returns:** *(Anonymous function)*
+
+___
+
+#### `Const` storeModelToFirestoreWith
+
+▸ **storeModelToFirestoreWith**<**A**>(`firestore`: any): *(Anonymous function)*
+
+Defined in src/Firestore.ts:111
+
+```
+storeModelToFirestoreWith :: Firestore -> Reader String (ReaderTaskEither (() -> Model) Model Error)
+```
+
+**Type parameters:**
+
+▪ **A**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`firestore` | any |
+
+**Returns:** *(Anonymous function)*
+
+
+<a name="modules_index_md"></a>
+
+[functional-firestore](#readmemd) › [Globals](#globalsmd) › ["index"](#modules_index_md)
+
+## External module: "index"
+
+### Index
+
+#### References
+
+* [Model](#model)
+* [getCollectionFromFirestore](#getcollectionfromfirestore)
+* [getDocumentFromCollection](#getdocumentfromcollection)
+* [getModelFromCollection](#getmodelfromcollection)
+* [getModelFromFirestore](#getmodelfromfirestore)
+* [getSnapshotFromDocument](#getsnapshotfromdocument)
+* [getSnapshotFromDocumentTask](#getsnapshotfromdocumenttask)
+* [isModel](#ismodel)
+* [listCollectionsInFirestore](#listcollectionsinfirestore)
+* [storeModelToCollection](#storemodeltocollection)
+* [storeModelToDocument](#storemodeltodocument)
+* [storeModelToFirestore](#storemodeltofirestore)
+* [storeModelToFirestoreWith](#storemodeltofirestorewith)
+* [validateModel](#validatemodel)
+* [validateSnapshotExistence](#validatesnapshotexistence)
+
+### References
+
+####  Model
+
+• **Model**:
+
+___
+
+####  getCollectionFromFirestore
+
+• **getCollectionFromFirestore**:
+
+___
+
+####  getDocumentFromCollection
+
+• **getDocumentFromCollection**:
+
+___
+
+####  getModelFromCollection
+
+• **getModelFromCollection**:
+
+___
+
+####  getModelFromFirestore
+
+• **getModelFromFirestore**:
+
+___
+
+####  getSnapshotFromDocument
+
+• **getSnapshotFromDocument**:
+
+___
+
+####  getSnapshotFromDocumentTask
+
+• **getSnapshotFromDocumentTask**:
+
+___
+
+####  isModel
+
+• **isModel**:
+
+___
+
+####  listCollectionsInFirestore
+
+• **listCollectionsInFirestore**:
+
+___
+
+####  storeModelToCollection
+
+• **storeModelToCollection**:
+
+___
+
+####  storeModelToDocument
+
+• **storeModelToDocument**:
+
+___
+
+####  storeModelToFirestore
+
+• **storeModelToFirestore**:
+
+___
+
+####  storeModelToFirestoreWith
+
+• **storeModelToFirestoreWith**:
+
+___
+
+####  validateModel
+
+• **validateModel**:
+
+___
+
+####  validateSnapshotExistence
+
+• **validateSnapshotExistence**:
+
+
+<a name="modules_taskeitherutils_md"></a>
+
+[functional-firestore](#readmemd) › [Globals](#globalsmd) › ["TaskEitherUtils"](#modules_taskeitherutils_md)
+
+## External module: "TaskEitherUtils"
+
+### Index
+
+#### Functions
+
+* [fromTask](#const-fromtask)
+
+### Functions
+
+#### `Const` fromTask
+
+▸ **fromTask**(`task`: Task‹A›): *TaskEither‹Error, A›*
+
+Defined in src/TaskEitherUtils.ts:11
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`task` | Task‹A› |
+
+**Returns:** *TaskEither‹Error, A›*

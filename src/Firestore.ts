@@ -17,12 +17,8 @@ export interface Model {
   id: string;
 }
 
-export interface Table {
-  name: string;
-}
-
 /**
- * ```haskell
+ * ```
  * isModel :: a -> bool
  * ```
  */
@@ -30,18 +26,18 @@ export const isModel = (a: unknown): a is Model =>
   allPass([is(Object), propIs(String, 'id')])(a);
 
 /**
- * ```haskell
- * getCollectionFromFirestore :: Firestore -> Reader Table Collection
+ * ```
+ * getCollectionFromFirestore :: Firestore -> Reader String Collection
  * ```
  */
 export const getCollectionFromFirestore: (
   firestore: Firestore
-) => R.Reader<Table, CollectionReference> = (firestore) => (
-  table: Table
-): CollectionReference => firestore.collection(table.name);
+) => R.Reader<string, CollectionReference> = (firestore) => (
+  table: string
+): CollectionReference => firestore.collection(table);
 
 /**
- * ```haskell
+ * ```
  * getDocumentFromCollection :: Collection -> Reader Model Document
  * ```
  */
@@ -52,7 +48,8 @@ export const getDocumentFromCollection: (
 ): DocumentReference => collection.doc(model.id);
 
 /**
- * ```haskell
+ * @internal
+ * ```
  * storeModelToDocumentTask :: Document -> Reader Model (Task Model)
  * ```
  */
@@ -66,11 +63,11 @@ const storeModelToDocumentTask: (
 };
 
 /**
- * ```haskell
+ * ```
  * storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
  * ```
  */
-const storeModelToDocument: (
+export const storeModelToDocument: (
   document: DocumentReference
 ) => RTE.ReaderTaskEither<Model, Error, Model> = pipe(
   storeModelToDocumentTask,
@@ -78,8 +75,8 @@ const storeModelToDocument: (
 );
 
 /**
- * ```haskell
- * storeModelToCollection :: Collection -> Table -> ReaderTaskEither Model Model Error
+ * ```
+ * storeModelToCollection :: Collection -> String -> ReaderTaskEither Model Model Error
  * ```
  */
 export const storeModelToCollection: (
@@ -90,26 +87,26 @@ export const storeModelToCollection: (
 );
 
 /**
- * ```haskell
- * storeModelToFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+ * ```
+ * storeModelToFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
  * ```
  */
 export const storeModelToFirestore: (
   firestore: Firestore
-) => R.Reader<Table, RTE.ReaderTaskEither<Model, Error, Model>> = pipe(
+) => R.Reader<string, RTE.ReaderTaskEither<Model, Error, Model>> = pipe(
   getCollectionFromFirestore,
   R.map(storeModelToCollection)
 );
 
 /**
- * ```haskell
- * storeModelToFirestoreWith :: Firestore -> Reader Table (ReaderTaskEither (() -> Model) Model Error)
+ * ```
+ * storeModelToFirestoreWith :: Firestore -> Reader String (ReaderTaskEither (() -> Model) Model Error)
  * ```
  */
 export const storeModelToFirestoreWith: <A>(
   firestore: Firestore
 ) => R.Reader<
-  Table,
+  string,
   R.Reader<(a: A) => Model, RTE.ReaderTaskEither<A, Error, Model>>
 > = <A>(firestore) => (table) => (
   fn: (a: A) => Model
@@ -117,7 +114,7 @@ export const storeModelToFirestoreWith: <A>(
   pipe(fn, storeModelToFirestore(firestore)(table));
 
 /**
- * ```haskell
+ * ```
  * getSnapshotFromDocumentTask :: Document -> Task Snapshot
  * ```
  */
@@ -127,7 +124,7 @@ export const getSnapshotFromDocumentTask: (
   document.get();
 
 /**
- * ```haskell
+ * ```
  * getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
  * ```
  */
@@ -139,7 +136,8 @@ export const getSnapshotFromDocument: (
 );
 
 /**
- * ```haskell
+ * @internal
+ * ```
  * getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
  * ```
  */
@@ -151,7 +149,8 @@ const getSnapshotFromCollection: (
 );
 
 /**
- * ```haskell
+ * @internal
+ * ```
  * getDataFromSnapshot :: Snapshot -> a
  * ```
  */
@@ -160,7 +159,7 @@ const getDataFromSnapshot: (snapshot: DocumentSnapshot) => unknown = (
 ) => snapshot.data();
 
 /**
- * ```haskell
+ * ```
  * validateSnapshotExistence :: snapshot -> Either a Error
  * ```
  */
@@ -171,7 +170,7 @@ export const validateSnapshotExistence: (
 );
 
 /**
- * ```haskell
+ * ```
  * validateModel :: a -> Either Model Error
  * ```
  */
@@ -182,7 +181,7 @@ export const validateModel: (
 );
 
 /**
- * ```haskell
+ * ```
  * getModelFromSnapshot :: Snapshot -> Either Model Error
  * ```
  */
@@ -195,7 +194,7 @@ const getModelFromSnapshot: (
 );
 
 /**
- * ```haskell
+ * ```
  * getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
  * ```
  */
@@ -207,19 +206,19 @@ export const getModelFromCollection: (
 );
 
 /**
- * ```haskell
- * getModelFromFirestore :: Firestore -> Reader Table (ReaderTaskEither Model Model Error)
+ * ```
+ * getModelFromFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
  * ```
  */
 export const getModelFromFirestore: (
   firestore: Firestore
-) => R.Reader<Table, RTE.ReaderTaskEither<Model, Error, Model>> = pipe(
+) => R.Reader<string, RTE.ReaderTaskEither<Model, Error, Model>> = pipe(
   getCollectionFromFirestore,
   R.map(getModelFromCollection)
 );
 
 /**
- * ```haskell
+ * ```
  * listCollectionsInFirestore :: Firestore -> Task [Collection]
  * ```
  */

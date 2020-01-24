@@ -1,5 +1,5 @@
 import fc, { Arbitrary } from 'fast-check';
-import { Model, Table } from './index';
+import { Model } from './index';
 
 export const id = (): Arbitrary<string> => fc.hexaString(16, 16);
 
@@ -25,7 +25,4 @@ export const model = (): Arbitrary<Model> =>
 
 export const models = (): Arbitrary<Array<Model>> => fc.array(model(), 2, 16);
 
-export const table = (): Arbitrary<Table> =>
-  fc.record<Table>({
-    name: id(),
-  });
+export const table = (): Arbitrary<string> => id();

@@ -8,13 +8,13 @@ definitions:
 pipelines:
   default:
     - step:
-        name: Build and test
+        name: Build and Unit Test
         caches:
           - node
         script:
           - npm install
           - npm audit fix
-          - npm test
+          - npm run unit-test
     - step:
         name: Integration Test
         caches:
@@ -25,7 +25,7 @@ pipelines:
         services:
           - firestore-emulator
     - step:
-        name: Publish
+        name: Publish and Generate Docs
         deployment: production
         trigger: manual
         caches:

@@ -3,7 +3,8 @@ import * as TE from 'fp-ts/lib/TaskEither';
 import * as E from 'fp-ts/lib/Either';
 
 /**
- * ```haskell
+ * @internal
+ * ```
  * fromThunk :: Task -> TaskEither
  * ```
  */

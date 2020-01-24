@@ -5,7 +5,6 @@ import {
   getModelFromFirestore,
   Model,
   storeModelToFirestore,
-  Table,
 } from '../../src';
 import { identity, map, pipe, thunkify } from 'ramda';
 import * as E from 'fp-ts/lib/Either';
@@ -83,9 +82,7 @@ describe('Firestore -> Integration Test', function() {
           async (table, sampleModel) => {
             await storeModelToTable(table)(sampleModel)();
 
-            const document = firestore
-              .collection(table.name)
-              .doc(sampleModel.id);
+            const document = firestore.collection(table).doc(sampleModel.id);
             const snapshot = await document.get();
             const storedModel = snapshot.data();
             expect(storedModel).to.deep.equals(sampleModel);
@@ -97,11 +94,11 @@ describe('Firestore -> Integration Test', function() {
 
   describe('#getModelFromFirestore()', function() {
     let getModelFromTable: (
-      table: Table
+      table: string
     ) => (model: Model) => TaskEither<Error, Model>;
 
     let storeModelToTable: (
-      table: Table
+      table: string
     ) => (model: Model) => TaskEither<Error, Model>;
 
     beforeEach(function() {
@@ -126,7 +123,7 @@ describe('Firestore -> Integration Test', function() {
           Arb.modelData(),
           async (table, model, randomObject) => {
             await firestore
-              .collection(table.name)
+              .collection(table)
               .doc(model.id)
               .set(randomObject);
 
