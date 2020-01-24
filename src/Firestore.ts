@@ -18,7 +18,7 @@ export interface Model {
 }
 
 /**
- * ```
+ * ```haskell
  * isModel :: a -> bool
  * ```
  */
@@ -26,7 +26,7 @@ export const isModel = (a: unknown): a is Model =>
   allPass([is(Object), propIs(String, 'id')])(a);
 
 /**
- * ```
+ * ```haskell
  * getCollectionFromFirestore :: Firestore -> Reader String Collection
  * ```
  */
@@ -37,7 +37,7 @@ export const getCollectionFromFirestore: (
 ): CollectionReference => firestore.collection(table);
 
 /**
- * ```
+ * ```haskell
  * getDocumentFromCollection :: Collection -> Reader Model Document
  * ```
  */
@@ -49,7 +49,7 @@ export const getDocumentFromCollection: (
 
 /**
  * @internal
- * ```
+ * ```haskell
  * storeModelToDocumentTask :: Document -> Reader Model (Task Model)
  * ```
  */
@@ -63,7 +63,7 @@ const storeModelToDocumentTask: (
 };
 
 /**
- * ```
+ * ```haskell
  * storeModelToDocument :: Document -> ReaderTaskEither Model Model Error
  * ```
  */
@@ -75,7 +75,7 @@ export const storeModelToDocument: (
 );
 
 /**
- * ```
+ * ```haskell
  * storeModelToCollection :: Collection -> String -> ReaderTaskEither Model Model Error
  * ```
  */
@@ -87,7 +87,7 @@ export const storeModelToCollection: (
 );
 
 /**
- * ```
+ * ```haskell
  * storeModelToFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
  * ```
  */
@@ -99,7 +99,7 @@ export const storeModelToFirestore: (
 );
 
 /**
- * ```
+ * ```haskell
  * storeModelToFirestoreWith :: Firestore -> Reader String (ReaderTaskEither (() -> Model) Model Error)
  * ```
  */
@@ -114,7 +114,7 @@ export const storeModelToFirestoreWith: <A>(
   pipe(fn, storeModelToFirestore(firestore)(table));
 
 /**
- * ```
+ * ```haskell
  * getSnapshotFromDocumentTask :: Document -> Task Snapshot
  * ```
  */
@@ -124,7 +124,7 @@ export const getSnapshotFromDocumentTask: (
   document.get();
 
 /**
- * ```
+ * ```haskell
  * getSnapshotFromDocument :: Document -> TaskEither Snapshot Error
  * ```
  */
@@ -137,7 +137,7 @@ export const getSnapshotFromDocument: (
 
 /**
  * @internal
- * ```
+ * ```haskell
  * getSnapshotFromCollection :: Collection -> ReaderTaskEither Model Snapshot Error
  * ```
  */
@@ -150,7 +150,7 @@ const getSnapshotFromCollection: (
 
 /**
  * @internal
- * ```
+ * ```haskell
  * getDataFromSnapshot :: Snapshot -> a
  * ```
  */
@@ -159,7 +159,7 @@ const getDataFromSnapshot: (snapshot: DocumentSnapshot) => unknown = (
 ) => snapshot.data();
 
 /**
- * ```
+ * ```haskell
  * validateSnapshotExistence :: snapshot -> Either a Error
  * ```
  */
@@ -170,7 +170,7 @@ export const validateSnapshotExistence: (
 );
 
 /**
- * ```
+ * ```haskell
  * validateModel :: a -> Either Model Error
  * ```
  */
@@ -181,7 +181,7 @@ export const validateModel: (
 );
 
 /**
- * ```
+ * ```haskell
  * getModelFromSnapshot :: Snapshot -> Either Model Error
  * ```
  */
@@ -194,7 +194,7 @@ const getModelFromSnapshot: (
 );
 
 /**
- * ```
+ * ```haskell
  * getModelFromCollection :: Collection -> ReaderTaskEither Model Model Error
  * ```
  */
@@ -206,7 +206,7 @@ export const getModelFromCollection: (
 );
 
 /**
- * ```
+ * ```haskell
  * getModelFromFirestore :: Firestore -> Reader String (ReaderTaskEither Model Model Error)
  * ```
  */
@@ -218,7 +218,7 @@ export const getModelFromFirestore: (
 );
 
 /**
- * ```
+ * ```haskell
  * listCollectionsInFirestore :: Firestore -> Task [Collection]
  * ```
  */

@@ -4,7 +4,7 @@ import * as E from 'fp-ts/lib/Either';
 
 /**
  * @internal
- * ```
+ * ```haskell
  * fromThunk :: Task -> TaskEither
  * ```
  */
